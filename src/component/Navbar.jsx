@@ -19,7 +19,7 @@ const Navbar = () => {
         }
     }
   return (
-    <div className="shadow-md left-0 top-0 w-full bg-slate-600">
+    <div className="shadow-md left-0 top-0 w-full bg-slate-600 fixed">
           <nav className="md:flex items-center md:py-4 md:px-0 py-2 px-2 justify-between">
               <div className="md:mx-2 flex items-center">
                   <Link to="/" className="text-xl text-white font-bold hover:text-slate-300 duration-300 px-1 md:py-1 py-4 cursor-pointer">Notebook</Link>
