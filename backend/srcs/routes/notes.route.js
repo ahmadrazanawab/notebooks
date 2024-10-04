@@ -47,5 +47,49 @@ notes.post('/addNote',
     }
    
 })
+// notes - 3 update note 
+notes.put('/updatenote/:id',
+    fetchUser, async (req, res) => {
+    try {
+        const { title, description, tag } = req.body;
+        let newNote = {};
+        if (title) { newNote.title = title }
+        if (description) { newNote.description = title }
+        if (tag) { newNote.tag = tag }
+        
+        let note = await Notes.findById(req.params.id);
+        if (!note) { return res.status(404).json("Not Found") };
+
+       
+        note = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
+
+        res.json({"Success":"Note has been Updated",note});
+        
+    } catch (error) {
+        console.log(error.message)
+        res.status(501).send("Something went to wrong");
+    }
+   
+})
+
+// add delete note 
+notes.delete('/deleteNote/:id',
+    fetchUser, async (req, res) => {
+    try {
+        let note = await Notes.findById(req.params.id);
+        if (!note) { return res.status(404).json("Not Found") };
+
+        
+
+        note = await Notes.findByIdAndDelete(req.params.id);
+
+        res.json({ "Success": "Note has been deleted", note: note });
+        
+    } catch (error) {
+        console.log(error.message)
+        res.status(501).send("Something went to wrong");
+    }
+   
+})
 
 module.exports = notes;
