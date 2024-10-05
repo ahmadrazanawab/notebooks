@@ -13,15 +13,14 @@ const ContextState = ({ children }) => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjcwMDA3NDYyODJlNWFkZmNmZjlmZmQwIiwiaWF0IjoxNzI4MDU2NTgyfQ.IrV_aH7IyLMDLAfbab2A_qC19040Qx4NXGaPFc2qxJI"
+                "auth-token":localStorage.getItem('token')
           }  
         })
         const json = await response.json();
         setNotes(json);
         console.log(json);
     }
-    // addnote
-    // authtoken = ""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjcwMDA3NDYyODJlNWFkZmNmZjlmZmQwIiwiaWF0IjoxNzI4MDU2NTgyfQ.IrV_aH7IyLMDLAfbab2A_qC19040Qx4NXGaPFc2qxJI""
+    // addnote 
     const addNote = async (title, description, tag) => {
         const response = await fetch(`${host}/api/v1/notes/addNote`,{
             method: "POST",
