@@ -3,8 +3,9 @@ import { MdOutlineEditCalendar } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import NoteContext from "../context/NotesContext";
 
-const NotesItem = ({ note, showModalBtn,UpdateNote}) => {
+const NotesItem = (props) => {
     const { deleteNote } = useContext(NoteContext)
+    const { note, showModalBtn, UpdateNote } = props;
     // onClick={showModalBtn}
   return (
     <div className="p-2">

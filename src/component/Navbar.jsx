@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Navbar = () => {
+
+    const history = useHistory();
+    const handleClickLogout = () => {
+        localStorage.removeItem('token');
+        history.push('/login');
+    }
   const Links = [
     { id: 1, name: "Home", to: "/" },
     { id: 2, name: "About", to: "/about" },
@@ -31,10 +38,11 @@ const Navbar = () => {
                         {Links.map(({ name, id,to }) => (
                         <li key={id} className="flex  justify-center  md:mx-3 md:my-0 my-7 mx-0 text-xl md:text-1xl  duration-500" onClick={OnClose}><Link to={to}  className="md:text-slate-100 text-slate-100 font-bold hover:text-pink-500 duration-500 cursor-pointer">{name}</Link></li>
                         ))}
-                <div className="flex justify-center" onClick={OnClose}>
-                    <Link to="/login" className="bg-blue-400 md:mx-2 font-semibold mx-1 py-1 px-2 md:px-3 rounded-md shadow-md text-slate-100">Login</Link>
-                    <Link to="/signup" className="bg-blue-400 md:mx-2 font-semibold mx-1 py-1 px-2 md:px-3 rounded-md shadow-md text-slate-100">Sign Up</Link>
-                </div>
+                  
+                  {!localStorage.getItem('token')?<div className="flex justify-center" onClick={OnClose}>
+                      <Link to="/login" className="bg-blue-400 md:mx-2 font-semibold mx-1 py-1 px-2 md:px-3 rounded-md shadow-md text-slate-100">Login</Link>
+                      <Link to="/signup" className="bg-blue-400 md:mx-2 font-semibold mx-1 py-1 px-2 md:px-3 rounded-md shadow-md text-slate-100">Sign Up</Link>
+                  </div>: <div className="flex justify-center"><button className="bg-blue-400 md:mx-2 font-semibold mx-1 py-1 px-2 md:px-3 rounded-md shadow-md text-slate-100" onClick={handleClickLogout}>Logout</button></div> }
                 </ul>
       </nav>
     </div>

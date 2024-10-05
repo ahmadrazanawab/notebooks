@@ -60,6 +60,10 @@ notes.put('/updatenote/:id',
         let note = await Notes.findById(req.params.id);
         if (!note) { return res.status(404).json("Not Found") };
 
+        // if (note.user.toString() !== req.user.id) {
+        //     return res.status(401).send("Not Allowed");
+        // }
+
        
         note = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
 
@@ -79,7 +83,10 @@ notes.delete('/deleteNote/:id',
         let note = await Notes.findById(req.params.id);
         if (!note) { return res.status(404).json("Not Found") };
 
-        
+        // if (note.user.toString() !== req.user.id) {
+        //     return res.status(401).send("Not Allowed");
+        // }
+
 
         note = await Notes.findByIdAndDelete(req.params.id);
 
